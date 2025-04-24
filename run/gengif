@@ -1,0 +1,7 @@
+#!/bin/sh -e
+#help: Generate "tty.gif".
+ttyrec-h '
+    tput civis
+    echo "$ shuf examples/words | slot-machine -C -s 3 | cowsay"
+    shuf examples/words | /build/slot-machine -C -s 3 | cowsay
+    echo'
