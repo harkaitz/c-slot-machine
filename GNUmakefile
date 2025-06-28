@@ -23,5 +23,6 @@ check:
 	test @"hello" = @$$($(BUILDDIR)/slot-machine$(EXE) -s 3 < examples/words)
 
 $(BUILDDIR)/slot-machine$(EXE): slot-machine.c
+	mkdir -p $(BUILDDIR)
 	$(CC) -o $@ $(CFLAGS) $(CPPFLAGS) $<
 
