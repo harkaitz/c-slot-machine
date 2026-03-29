@@ -4,14 +4,18 @@
 
 PROJECT   =c-slot-machine
 VERSION   =1.0.0
-CC        =$(shell which $(TPREFIX)cc $(TPREFIX)gcc 2>/dev/null | head -n 1)
-CFLAGS    =-Wall -g3 -std=c99
+
 PREFIX    =/usr/local
+DESTDIR   =$(HOMEDRIVE)
+
+TPREFIX   =$(HOMEDRIVE:C:=x86_64-w64-mingw32-)
+EXE       =$(HOMEDRIVE:C:=.exe)
+
+CC        =cc
+CFLAGS    =-Wall -g3 -std=c99
+
 BUILDDIR ?=.build
-UNAME_S  ?=$(shell uname -s)
-EXE      ?=$(shell uname -s | awk '/Windows/ || /MSYS/ || /CYG/ { print ".exe" }')
-PROGS     =\
-    $(BUILDDIR)/slot-machine$(EXE)
+PROGS     =$(BUILDDIR)/slot-machine$(EXE)
 
 all: $(PROGS)
 clean:
@@ -24,5 +28,5 @@ check:
 
 $(BUILDDIR)/slot-machine$(EXE): slot-machine.c
 	mkdir -p $(BUILDDIR)
-	$(CC) -o $@ $(CFLAGS) $(CPPFLAGS) $<
+	$(CC) -o $@ $(CFLAGS) $(CPPFLAGS) slot-machine.c
 
